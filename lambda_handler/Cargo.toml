@@ -1,5 +1,6 @@
 [package]
 name = "lambda_handler"
+description = "A library for handling AWS Lambda requests"
 version = "0.1.0"
 authors = ["Matthew Badger <matt@branchenergy.com>"]
 license = "Apache-2.0"
