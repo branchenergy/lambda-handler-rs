@@ -487,7 +487,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "lambda_router"
+name = "lambda_handler"
 version = "0.1.0"
 dependencies = [
  "aws_lambda_events",
@@ -501,10 +501,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "lambda_router_example"
+name = "lambda_handler_example"
 version = "0.1.0"
 dependencies = [
- "lambda_router",
+ "lambda_handler",
  "lambda_runtime",
  "serde",
  "serde_json",

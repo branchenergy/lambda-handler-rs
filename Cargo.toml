@@ -1,6 +1,6 @@
 [workspace]
 members = [
-    "lambda_router",
-    "lambda_router_example"
+    "lambda_handler",
+    "lambda_handler_example"
 ]
 resolver = "2"

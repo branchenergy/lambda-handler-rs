@@ -49,7 +49,7 @@ fn get_event_key(
 ///
 /// Routes incoming AWS events to their corresponding handlers based
 /// on their types and names.
-pub struct LambdaRouter<R>
+pub struct LambdaHandler<R>
 where
     R: Debug + Serialize + 'static,
 {
@@ -57,14 +57,14 @@ where
     handlers: HashMap<(TypeId, String), Box<dyn Callable<R>>>,
 }
 
-impl<R: Debug + Serialize> LambdaRouter<R> {
-    /// Creates a new `LambdaRouter`.
+impl<R: Debug + Serialize> LambdaHandler<R> {
+    /// Creates a new `LambdaHandler`.
     ///
     /// # Returns
     ///
-    /// A new `LambdaRouter` instance.
+    /// A new `LambdaHandler` instance.
     pub fn new() -> Self {
-        LambdaRouter {
+        LambdaHandler {
             handlers: HashMap::new(),
         }
     }
@@ -97,18 +97,18 @@ impl<R: Debug + Serialize> LambdaRouter<R> {
     }
 }
 
-impl<R: Debug + Serialize> Default for LambdaRouter<R> {
-    /// Provides default instance of `LambdaRouter`.
+impl<R: Debug + Serialize> Default for LambdaHandler<R> {
+    /// Provides default instance of `LambdaHandler`.
     ///
     /// # Returns
     ///
-    /// A default `LambdaRouter` instance.
+    /// A default `LambdaHandler` instance.
     fn default() -> Self {
         Self::new()
     }
 }
 
-impl<R: Debug + Serialize> Service<LambdaEvent<Value>> for LambdaRouter<R> {
+impl<R: Debug + Serialize> Service<LambdaEvent<Value>> for LambdaHandler<R> {
     type Response = R;
     type Error = LambdaError;
     type Future = LambdaFuture<R>;

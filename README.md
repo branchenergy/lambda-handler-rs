@@ -10,8 +10,8 @@ It makes for extremely simple code:
 use lambda_runtime::{Error as LambdaError, LambdaEvent};
 use serde::Serialize;
 
-use lambda_router::events::{S3Event, SnsEvent, SqsEvent};
-use lambda_router::LambdaRouter;
+use lambda_handler::events::{S3Event, SnsEvent, SqsEvent};
+use lambda_handler::LambdaHandler;
 
 
 #[derive(Debug, Serialize)]
@@ -50,7 +50,7 @@ async fn main() -> Result<(), LambdaError> {
         .without_time()
         .init();
 
-    let router = LambdaRouter::<Response>::new()
+    let router = LambdaHandler::<Response>::new()
         .route("ObjectCreated:Put", handle_s3_event)
         .route("ObjectCreated:Delete", handle_s3_event)
         .route("arn:aws:sns:us-east-1:246796806071:snsNetTest", handle_sns_event)
@@ -72,8 +72,8 @@ here:
 
 - It must implement `Debug` and `Serialize` (which are easily derived, as here)
 - It must be used in the return type of _all_ handling functions
-- It is used to create a `LambdaRouter` instance which expects handling functions to
-  return it, with `LambdaRouter::<Response>::new()`
+- It is used to create a `LambdaHandler` instance which expects handling functions to
+  return it, with `LambdaHandler::<Response>::new()`
 
 Next we define three async functions that handle the events themselves; this is where
 most of the code in your binary actually resides. Each takes an `event` of type
@@ -84,7 +84,7 @@ Finally, we have our async `main` function. We set up tracing, and then create o
 router:
 
 ```rust
-    let router = LambdaRouter::<Response>::new()
+    let router = LambdaHandler::<Response>::new()
         .route("ObjectCreated:Put", handle_s3_event)
         .route("ObjectCreated:Delete", handle_s3_event)
         .route("arn:aws:sns:us-east-1:246796806071:snsNetTest", handle_sns_event)

@@ -1,8 +1,10 @@
+/// Examples
+
 use lambda_runtime::{Error as LambdaError, LambdaEvent};
 use serde::Serialize;
 
-use lambda_router::events::{S3Event, SnsEvent, SqsEvent};
-use lambda_router::router::LambdaRouter;
+use lambda_handler::events::{S3Event, SnsEvent, SqsEvent};
+use lambda_handler::handler::LambdaHandler;
 
 
 #[derive(Debug, Serialize)]
@@ -41,7 +43,7 @@ async fn main() -> Result<(), LambdaError> {
         .without_time()
         .init();
 
-    let router = LambdaRouter::<Response>::new()
+    let router = LambdaHandler::<Response>::new()
         .route("ObjectCreated:Put", handle_s3_event)
         .route("ObjectCreated:Delete", handle_s3_event)
         .route("arn:aws:sns:us-east-1:246796806071:snsNetTest", handle_sns_event)
