@@ -1,6 +1,6 @@
-# Lambda Router
+# Lambda Handler
 
-`lambda-router` is a Rust library for creating AWS Lambda functions which handle
+`lambda_handler` is a Rust library for creating AWS Lambda functions which handle
 multiple requests, routing each based on the type of the request and its name (for
 instance, an S3 event name, an SNS topic name, etc.).
 
