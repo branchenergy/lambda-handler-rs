@@ -41,11 +41,11 @@ async fn main() -> Result<(), LambdaError> {
         .without_time()
         .init();
 
-    let router = LambdaHandler::<Response>::new()
+    let handler = LambdaHandler::<Response>::new()
         .route("ObjectCreated:Put", handle_s3_event)
         .route("ObjectCreated:Delete", handle_s3_event)
         .route("arn:aws:sns:us-east-1:246796806071:snsNetTest", handle_sns_event)
         .route("arn:aws:sqs:us-west-2:123456789012:SQSQueue", handle_sqs_event);
 
-    lambda_runtime::run(router).await
+    lambda_runtime::run(handler).await
 }
