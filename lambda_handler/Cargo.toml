@@ -1,9 +1,11 @@
 [package]
 name = "lambda_handler"
 description = "A library for handling AWS Lambda requests"
-version = "0.1.2"
+version = "0.1.3"
 authors = ["Matthew Badger <matt@branchenergy.com>"]
 license = "Apache-2.0"
+repository = "https://github.com/branchenergy/lambda-handler-rs"
+documentation = "https://docs.rs/lambda_handler"
 edition = "2021"
 
 [dependencies]
